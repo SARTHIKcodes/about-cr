@@ -1,86 +1,6 @@
-:root {
-    --bg-primary: #fff;
-    --bg-secondary: #f6f6f6;
-    --bg-tertiary: #ededed;
-    --text-primary: #0b0b0b;
-    --text-secondary: #555;
-    --text-tertiary: #333;
-    --border-color: #dedede;
-    --banner-bg: #000;
-    --banner-hover: #242424;
-    --banner-text: #fff;
-    --shadow-color: rgba(0, 0, 0, 0.12);
-}
+@import url("base.css");
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-primary: #111;
-        --bg-secondary: #191919;
-        --bg-tertiary: #242424;
-        --text-primary: #f5f5f5;
-        --text-secondary: #b8b8b8;
-        --text-tertiary: #d7d7d7;
-        --border-color: #303030;
-        --banner-bg: #050505;
-        --banner-hover: #1b1b1b;
-        --banner-text: #fff;
-        --shadow-color: rgba(0, 0, 0, 0.35);
-    }
-}
-
-html[data-theme="dark"] {
-    --bg-primary: #111;
-    --bg-secondary: #191919;
-    --bg-tertiary: #242424;
-    --text-primary: #f5f5f5;
-    --text-secondary: #b8b8b8;
-    --text-tertiary: #d7d7d7;
-    --border-color: #303030;
-    --banner-bg: #050505;
-    --banner-hover: #1b1b1b;
-    --banner-text: #fff;
-    --shadow-color: rgba(0, 0, 0, 0.35);
-}
-
-html[data-theme="light"] {
-    --bg-primary: #fff;
-    --bg-secondary: #f6f6f6;
-    --bg-tertiary: #ededed;
-    --text-primary: #0b0b0b;
-    --text-secondary: #555;
-    --text-tertiary: #333;
-    --border-color: #dedede;
-    --banner-bg: #000;
-    --banner-hover: #242424;
-    --banner-text: #fff;
-    --shadow-color: rgba(0, 0, 0, 0.12);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-@font-face {
-    font-family: "MyCustomFont";
-    src: url(fonts/Druk-Wide-Bold.ttf);
-    font-style: normal;
-}
-
-html {
-    font-size: 16px;
-}
-
-body {
-    overflow-x: hidden;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: "JetBrains Mono", monospace;
-    line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
+/* ── Hero banner ── */
 .hero {
     width: 100%;
     min-height: clamp(260px, 42vw, 520px);
@@ -114,58 +34,24 @@ body {
     filter: saturate(0.9) contrast(1.05);
 }
 
-.theme-toggle {
-    position: absolute;
-    right: clamp(14px, 3vw, 32px);
-    top: clamp(14px, 3vw, 28px);
-    width: clamp(38px, 5vw, 48px);
-    height: clamp(38px, 5vw, 48px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 50%;
+.hero .theme-toggle {
+    border-color: rgba(255, 255, 255, 0.22);
     background: rgba(0, 0, 0, 0.38);
-    color: var(--banner-text);
-    cursor: pointer;
-    z-index: 10;
-    padding: 0;
-    backdrop-filter: blur(8px);
-    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.theme-toggle:hover {
-    background-color: var(--banner-hover);
+.hero .theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.6);
     border-color: rgba(255, 255, 255, 0.45);
-    transform: translateY(-1px);
 }
 
-.theme-toggle svg {
-    width: 58%;
-    height: 58%;
-}
-
-.theme-toggle .sun-icon {
-    display: none;
-}
-
-.theme-toggle .moon-icon {
-    display: block;
-}
-
-html[data-theme="dark"] .theme-toggle .sun-icon {
-    display: block;
-}
-
-html[data-theme="dark"] .theme-toggle .moon-icon {
-    display: none;
-}
-
+/* ── Hero title overlay ── */
 .title-container {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: min(920px, calc(100% - 32px));
+    width: min(920px, calc(100% - var(--page-gutter)));
     transform: translate(-50%, -50%);
     z-index: 5;
     color: var(--banner-text);
@@ -213,35 +99,45 @@ html[data-theme="dark"] .theme-toggle .moon-icon {
     font-weight: 700;
     line-height: 1.2;
     text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.hero-teams span {
+    opacity: 0.72;
+    cursor: default;
+}
+
+.hero-teams a {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 4px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    transition: color 0.25s ease, text-underline-offset 0.25s ease, opacity 0.25s ease;
 }
 
-.hero-teams span:hover,
 .hero-teams a:hover {
     color: #fff;
-    opacity: 0.9;
+    opacity: 1;
     text-decoration: none;
 }
 
-.section-contanier {
-    width: min(1180px, calc(100% - 32px));
+/* ── Main content grid ── */
+.section-container {
+    width: min(1180px, calc(100% - var(--page-gutter)));
     margin: 0 auto;
-    padding: clamp(28px, 5vw, 64px) 0;
+    padding: clamp(28px, 5vw, 64px) 0 clamp(36px, 6vw, 72px);
     display: grid;
     grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
     gap: clamp(24px, 4vw, 54px);
     align-items: start;
+    animation: fadeInUp 0.65s 0.15s ease both;
 }
 
 section {
     min-width: 0;
 }
 
+/* ── Sticky info panel ── */
 .information {
     position: sticky;
     top: 24px;
@@ -253,6 +149,7 @@ section {
 .information img {
     display: block;
     width: 100%;
+    max-width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: center top;
@@ -260,6 +157,7 @@ section {
     box-shadow: 0 18px 44px var(--shadow-color);
 }
 
+/* ── Goals stats card ── */
 .abouthim {
     width: 100%;
     border: 1px solid var(--border-color);
@@ -271,7 +169,7 @@ section {
 .stats-heading,
 .stat-row {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 18px;
 }
@@ -281,21 +179,17 @@ section {
     border-bottom: 1px solid var(--border-color);
     color: var(--text-secondary);
     font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-}
-
-.stats-heading span:first-child {
-    grid-column: 2;
-    grid-row: 1;
+    letter-spacing: 0.04em;
 }
 
 .stats-heading span:last-child {
-    grid-column: 1;
-    grid-row: 1;
+    text-align: right;
 }
 
 .stat-row {
-    padding: 18px;
+    padding: 16px 18px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -303,41 +197,56 @@ section {
     border-bottom: none;
 }
 
-.stat-row h1 {
+.stat-row h3 {
+    margin: 0;
     color: var(--text-primary);
     font-family: "MyCustomFont";
     font-size: clamp(0.9rem, 2.1vw, 1.25rem);
     font-weight: bolder;
-    line-height: 1.1;
+    line-height: 1.15;
 }
 
 .goals {
     min-width: 66px;
-    padding: 6px 8px;
+    padding: 6px 10px;
     background-color: var(--banner-bg);
     color: var(--banner-text);
     font-family: "MyCustomFont";
     font-size: clamp(0.92rem, 2vw, 1.15rem);
     line-height: 1;
     text-align: center;
+    justify-self: end;
 }
 
+/* ── Career timeline ── */
 .menu {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
+.menu-heading {
+    margin: 0 0 4px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
 .career-item {
     position: relative;
     padding: clamp(18px, 3vw, 26px);
+    padding-left: clamp(22px, 3vw, 30px);
     border: 1px solid var(--border-color);
+    border-left: 3px solid var(--banner-bg);
     background-color: var(--bg-secondary);
-    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .career-item:hover {
     transform: translateY(-2px);
+    box-shadow: 0 12px 28px var(--shadow-color);
 }
 
 .years {
@@ -347,10 +256,11 @@ section {
     font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
-.career-item h1 {
-    margin-bottom: 10px;
+.career-item h2 {
+    margin: 0 0 10px;
     color: var(--text-primary);
     font-family: "MyCustomFont";
     font-size: clamp(1.1rem, 3vw, 1.55rem);
@@ -358,20 +268,22 @@ section {
 }
 
 .career-item p {
+    margin: 0;
     max-width: 68ch;
     color: var(--text-secondary);
     font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.75;
 }
 
-footer {
+/* ── Site footer ── */
+.site-footer {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--banner-bg);
     width: 100%;
     padding: clamp(16px, 3vw, 22px);
-    margin-top: 8px;
+    padding-bottom: max(clamp(16px, 3vw, 22px), env(safe-area-inset-bottom));
     font-family: "MyCustomFont";
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     font-weight: bolder;
@@ -379,37 +291,104 @@ footer {
     transition: background-color 0.3s ease;
 }
 
-footer:hover {
+.site-footer:hover {
     background-color: var(--banner-hover);
 }
 
-footer a {
+.site-footer a {
     color: var(--banner-text);
     text-decoration: none;
+    padding: 8px 12px;
 }
 
+/* ── Touch devices: skip hover lift ── */
+@media (hover: none) {
+    .career-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* ── Large desktop ── */
+@media (min-width: 1400px) {
+    .section-container {
+        width: min(1240px, calc(100% - 48px));
+    }
+
+    .title-container {
+        width: min(980px, calc(100% - 48px));
+    }
+}
+
+/* ── Laptop / small desktop ── */
+@media (max-width: 1200px) {
+    .section-container {
+        width: min(1080px, calc(100% - var(--page-gutter)));
+        gap: clamp(20px, 3vw, 40px);
+    }
+}
+
+/* ── Tablet landscape ── */
+@media (max-width: 1024px) {
+    .hero {
+        min-height: clamp(240px, 48vw, 460px);
+    }
+
+    .section-container {
+        grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .information {
+        top: 20px;
+    }
+}
+
+/* ── Tablet portrait ── */
 @media (max-width: 900px) {
     .hero {
         min-height: clamp(240px, 58vw, 420px);
     }
 
-    .section-contanier {
+    .section-container {
         grid-template-columns: 1fr;
-        width: min(720px, calc(100% - 28px));
+        width: min(720px, calc(100% - var(--page-gutter)));
+        padding-bottom: clamp(28px, 5vw, 48px);
     }
 
     .information {
         position: static;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: clamp(16px, 3vw, 24px);
+        align-items: start;
+    }
+
+    .information img {
+        aspect-ratio: 3 / 4;
+        max-height: none;
+    }
+}
+
+/* ── Large phone / small tablet ── */
+@media (max-width: 768px) {
+    .title-container h1 {
+        font-size: clamp(2rem, 10vw, 4.5rem);
+    }
+
+    .information {
+        grid-template-columns: 1fr;
     }
 
     .information img {
         aspect-ratio: 16 / 10;
+        max-height: 380px;
     }
 }
 
+/* ── Mobile ── */
 @media (max-width: 560px) {
     .hero {
-        min-height: 300px;
+        min-height: clamp(260px, 72vw, 360px);
     }
 
     .banner-container img {
@@ -418,66 +397,139 @@ footer a {
 
     .title-container {
         width: calc(100% - 24px);
+        top: 52%;
     }
 
     .title-container h1 {
-        font-size: clamp(2rem, 13vw, 3.6rem);
+        font-size: clamp(1.85rem, 11vw, 3.2rem);
+        line-height: 0.95;
     }
 
     .title-container p {
         font-size: 0.68rem;
+        padding: 6px 10px;
     }
 
     .hero-teams {
-        gap: 7px;
-        margin-top: 12px;
+        gap: 6px 10px;
+        margin-top: 10px;
     }
 
     .hero-teams span,
     .hero-teams a {
-        font-size: 0.62rem;
+        font-size: 0.6rem;
     }
 
-    .theme-toggle {
-        right: 12px;
-        top: 12px;
-        width: 38px;
-        height: 38px;
-    }
-
-    .section-contanier {
-        width: min(100% - 22px, 520px);
-        padding: 24px 0;
-        gap: 22px;
+    .section-container {
+        width: calc(100% - var(--page-gutter));
+        max-width: 520px;
+        padding: 20px 0 28px;
+        gap: 20px;
     }
 
     .information img {
         aspect-ratio: 1 / 1;
+        max-height: none;
     }
 
     .stats-heading,
     .stat-row {
-        gap: 12px;
+        gap: 10px;
     }
 
     .stats-heading,
     .stat-row,
     .career-item {
-        padding: 15px;
+        padding: 14px;
+    }
+
+    .career-item {
+        padding-left: 16px;
+    }
+
+    .stat-row h3 {
+        font-size: clamp(0.82rem, 3.8vw, 1rem);
     }
 
     .goals {
-        min-width: 58px;
+        min-width: 52px;
+        padding: 5px 8px;
+        font-size: 0.88rem;
+    }
+
+    .career-item h2 {
+        font-size: clamp(1rem, 5vw, 1.35rem);
+    }
+
+    .career-item p {
+        font-size: 0.88rem;
+        line-height: 1.65;
     }
 }
 
+/* ── Small mobile ── */
 @media (max-width: 380px) {
-    .title-container h1 {
-        font-size: clamp(1.7rem, 12vw, 2.6rem);
+    .hero {
+        min-height: 240px;
     }
 
-    .stat-row h1,
-    .career-item h1 {
+    .title-container h1 {
+        font-size: clamp(1.55rem, 10.5vw, 2.4rem);
+    }
+
+    .hero-teams span,
+    .hero-teams a {
+        font-size: 0.55rem;
+    }
+
+    .stat-row h3,
+    .career-item h2 {
         overflow-wrap: anywhere;
+    }
+
+    .stats-heading {
+        font-size: 0.68rem;
+    }
+}
+
+/* ── Very small screens ── */
+@media (max-width: 320px) {
+    .section-container {
+        width: calc(100% - 20px);
+    }
+
+    .title-container {
+        width: calc(100% - 16px);
+    }
+
+    .goals {
+        min-width: 46px;
+        font-size: 0.82rem;
+    }
+}
+
+/* ── Phone landscape ── */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        max-height: 420px;
+    }
+
+    .title-container {
+        top: 54%;
+    }
+
+    .title-container h1 {
+        font-size: clamp(1.6rem, 8vh, 3rem);
+    }
+
+    .title-container p,
+    .hero-teams {
+        display: none;
+    }
+
+    .section-container {
+        padding-top: 20px;
     }
 }
